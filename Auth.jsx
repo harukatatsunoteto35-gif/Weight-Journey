@@ -4,12 +4,17 @@ import * as api from "./api";
 import defaultAvatarUrl from "./default-avatar.jpg";
 
 export function Field({ label, value, onChange, type = "text" }) {
+  const showDatePreview = type === "date" && value;
+  const preview = showDatePreview
+    ? new Date(value + "T00:00:00").toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })
+    : null;
   return (
     <label style={{ display: "block" }}>
       <span style={{ fontSize: 12, fontWeight: 500, color: C.textMuted, marginBottom: 4, display: "block" }}>{label}</span>
       <input
         type={type}
         value={value}
+        lang="en-US"
         onChange={(e) => onChange(e.target.value)}
         style={{
           width: "100%",
@@ -23,6 +28,7 @@ export function Field({ label, value, onChange, type = "text" }) {
           boxSizing: "border-box",
         }}
       />
+      {preview && <span style={{ fontSize: 11, color: C.textFaint, marginTop: 4, display: "block" }}>{preview}</span>}
     </label>
   );
 }
