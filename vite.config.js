@@ -7,5 +7,5 @@ import react from "@vitejs/plugin-react";
 // path prefix to load its JS/CSS correctly.
 export default defineConfig({
   plugins: [react()],
-  base: "/Weight-Journe/",
+  base: "/Weight-Journey/",
 });
