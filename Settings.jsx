@@ -54,6 +54,18 @@ export default function Settings({ profile, account, onProfileSaved, onAvatarCha
     }
   };
 
+  const handleResetAvatar = async () => {
+    setAvatarUploading(true);
+    try {
+      await api.updateAvatar(null);
+      onAvatarChanged(null);
+    } catch (e) {
+      alert(e.message);
+    } finally {
+      setAvatarUploading(false);
+    }
+  };
+
   const handleSetPassphrase = async () => {
     try {
       await api.setPassphrase(passphrase.trim());
@@ -95,7 +107,19 @@ export default function Settings({ profile, account, onProfileSaved, onAvatarCha
             e.target.value = "";
           }}
         />
-        <p style={{ fontFamily: fontSerif, fontSize: 18, margin: 0 }}>@{account.username}</p>
+        <div style={{ flex: 1 }}>
+          <p style={{ fontFamily: fontSerif, fontSize: 18, margin: 0 }}>@{account.username}</p>
+          {account.avatarUrl && (
+            <button
+              type="button"
+              onClick={handleResetAvatar}
+              disabled={avatarUploading}
+              style={{ background: "none", border: "none", padding: 0, marginTop: 4, fontSize: 12, color: C.textFaint, textDecoration: "underline", cursor: "pointer" }}
+            >
+              Reset to default
+            </button>
+          )}
+        </div>
       </div>
 
       <div style={{ display: "flex", gap: 8 }}>
