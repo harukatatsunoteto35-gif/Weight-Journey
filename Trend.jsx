@@ -45,7 +45,7 @@ export default function Trend({ profile, weightLogs, progressPct, latestWeight }
         <Stat label="Current" value={latestWeight != null ? `${latestWeight} ${profile.unit}` : "—"} />
         <Stat label="Goal" value={`${profile.goalWeight} ${profile.unit}`} />
         <Stat label="Started" value={`${profile.startWeight} ${profile.unit}`} />
-        <Stat label="Progress" value={`${Math.round(progressPct)}%`} color={progressPct < 0 ? C.warn : undefined} />
+        <Stat label="Progress" value={`${Math.round(progressPct)}%`} color={progressPct < 0 ? C.danger : undefined} />
       </div>
 
       {profile.endDate && (
