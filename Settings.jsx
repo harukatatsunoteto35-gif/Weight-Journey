@@ -107,18 +107,16 @@ export default function Settings({ profile, account, onProfileSaved, onAvatarCha
             e.target.value = "";
           }}
         />
-        <div style={{ flex: 1 }}>
+<div style={{ flex: 1 }}>
           <p style={{ fontFamily: fontSerif, fontSize: 18, margin: 0 }}>@{account.username}</p>
-          {account.avatarUrl && (
-            <button
-              type="button"
-              onClick={handleResetAvatar}
-              disabled={avatarUploading}
-              style={{ background: "none", border: "none", padding: 0, marginTop: 4, fontSize: 12, color: C.textFaint, textDecoration: "underline", cursor: "pointer" }}
-            >
-              Reset profile picture to default
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={handleResetAvatar}
+            disabled={avatarUploading}
+            style={{ background: "none", border: "none", padding: 0, marginTop: 4, fontSize: 12, color: C.textFaint, textDecoration: "underline", cursor: "pointer" }}
+          >
+            Reset profile picture to default
+          </button>
         </div>
       </div>
 
