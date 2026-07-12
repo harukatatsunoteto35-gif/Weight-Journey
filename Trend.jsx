@@ -4,11 +4,11 @@ import { C, fontSerif, cardStyle } from "./theme";
 
 const fmtDate = (d) => new Date(d + "T00:00:00").toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
 
-function Stat({ label, value }) {
+function Stat({ label, value, color }) {
   return (
     <div style={{ background: C.card, borderRadius: 16, padding: 16, boxShadow: "0 1px 3px rgba(0,0,0,0.04)", border: `1px solid ${C.cardBorder}`, textAlign: "center" }}>
       <p style={{ fontSize: 12, color: C.textFaint, marginBottom: 4 }}>{label}</p>
-      <p style={{ fontFamily: fontSerif, fontSize: 20, color: C.textSoft, margin: 0 }}>{value}</p>
+      <p style={{ fontFamily: fontSerif, fontSize: 20, color: color || C.textSoft, margin: 0 }}>{value}</p>
     </div>
   );
 }
@@ -45,7 +45,7 @@ export default function Trend({ profile, weightLogs, progressPct, latestWeight }
         <Stat label="Current" value={latestWeight != null ? `${latestWeight} ${profile.unit}` : "—"} />
         <Stat label="Goal" value={`${profile.goalWeight} ${profile.unit}`} />
         <Stat label="Started" value={`${profile.startWeight} ${profile.unit}`} />
-        <Stat label="Progress" value={`${Math.round(progressPct)}%`} />
+        <Stat label="Progress" value={`${Math.round(progressPct)}%`} color={progressPct < 0 ? C.warn : undefined} />
       </div>
 
       {profile.endDate && (
