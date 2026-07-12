@@ -116,7 +116,7 @@ export default function Settings({ profile, account, onProfileSaved, onAvatarCha
               disabled={avatarUploading}
               style={{ background: "none", border: "none", padding: 0, marginTop: 4, fontSize: 12, color: C.textFaint, textDecoration: "underline", cursor: "pointer" }}
             >
-              Reset to default
+              Reset profile picture to default
             </button>
           )}
         </div>
