@@ -11,6 +11,7 @@ import Settings from "./Settings";
 import defaultAvatarUrl from "./default-avatar.jpg";
 
 const todayStr = () => new Date().toISOString().slice(0, 10);
+const fmtShortDate = (d) => new Date(d + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" });
 
 function LoadingScreen({ text }) {
   return (
@@ -143,7 +144,9 @@ export default function App() {
         <div>
           <p style={{ fontSize: 11, letterSpacing: 2, textTransform: "uppercase", color: C.eyebrow, margin: 0 }}>@{account.username}'s journey</p>
           <h1 style={{ fontFamily: fontSerif, fontSize: 30, marginTop: 4 }}>
-            {tab === "today" ? "Today" : tab === "trend" ? "The Trend" : tab === "journal" ? "Journal" : "Settings"}
+            {tab === "today"
+              ? (selectedDate === todayStr() ? "Today" : fmtShortDate(selectedDate))
+              : tab === "trend" ? "The Trend" : tab === "journal" ? "Journal" : "Settings"}
           </h1>
         </div>
         <img
@@ -198,7 +201,10 @@ export default function App() {
         ].map(({ key, icon: Icon, label }) => (
           <button
             key={key}
-            onClick={() => setTab(key)}
+            onClick={() => {
+              if (key === "today") setSelectedDate(todayStr());
+              setTab(key);
+            }}
             style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, padding: "4px 12px", background: "none", border: "none", color: tab === key ? C.rose : C.textFaint, cursor: "pointer" }}
           >
             <Icon size={20} strokeWidth={tab === key ? 2.4 : 1.8} />
